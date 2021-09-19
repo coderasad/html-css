@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Animated Circle Text Logo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="ar-circle">
+        <div class="logo"></div>
+        <div class="text">
+            <p>Asad Rahman - Creative Web Designer -</p>
+        </div>
+    </div>
+
+<script>
+    const text = document.querySelector(".text p");
+    text.innerHTML = text.innerText.split("").map(
+        (char, i) =>
+            `<span style="transform: rotate(${i * 9.5}deg)">${char}</span>`
+    ).join("")
+</script>
+</body>
+</html>
