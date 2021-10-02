@@ -1,27 +1,55 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quick css Border Trick</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<a href="#" class="btn">
-    <span>Button</span>
-</a>
+    <div class="button-one">
+        <a href="#" class="btn">
+            <span>Button</span>
+        </a>
+    </div>
+    <!-- <div class="button-two"> -->
+        <button>Hello Button </button>
+    <!-- </div> -->
 
-<script>
-    const btn = document.querySelector('.btn');
-    btn.onmousemove = function (e){
-        const x = e.pageX - btn.offsetLeft;
-        const y = e.pageY - btn.offsetTop;
+    <script>
+        const btn = document.querySelector('.btn');
+        btn.onmousemove = function (e) {
+            const x = e.pageX - btn.offsetLeft;
+            const y = e.pageY - btn.offsetTop;
+            btn.style.setProperty('--x', x + 'px');
+            btn.style.setProperty('--y', y + 'px');
+        }
 
-        btn.style.setProperty('--x', x + 'px');
-        btn.style.setProperty('--y', y + 'px');
-    }
-</script>
+        //button-two
+        let buttons = document.querySelectorAll('button');
+
+        buttons.forEach(function (btn) {
+            btn.addEventListener('click', createRipple);
+        })
+
+        function createRipple(e) {
+            let x = e.clientX - e.target.offsetLeft;
+            let y = e.clientY - e.target.offsetTop;
+            let circle = document.createElement('div');
+            circle.style.left = x + 'px';
+            circle.style.top = y + 'px';
+
+            circle.classList.add('ripple');
+            if (this.getElementsByClassName('ripple').length > 0) {
+                this.removeChild(this.childNodes[1]);
+            }
+            this.appendChild(circle);
+        }
+    </script>
 </body>
+
 </html>
