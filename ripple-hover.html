@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: #efefef;
+    }
+
+    button {
+        font-family: 'Roboto';
+        font-size: 24px;
+        padding: 1em 2em;
+        margin: 2px;
+        border: 0;
+        outline: 0;
+        color: white;
+        background-color: #2196f3;
+        text-transform: uppercase;
+        border-radius: 0.15em;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    button .ripple {
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.7);
+        position: absolute;
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+    }
+
+    @keyframes ripple {
+        to {
+            transform: scale(2.5);
+            opacity: 0;
+        }
+    }
+</style>
+
+<body>
+    <button>Hello Boss :) </button>
+    <button>Hello :) </button>
+
+    <script>
+        var buttons = document.querySelectorAll('button');
+
+        buttons.forEach(function (b) {
+            b.addEventListener('click', createRipple);
+        })
+
+        function createRipple(e) {
+            if (this.getElementsByClassName('ripple').length > 0) {
+                this.removeChild(this.childNodes[1]);
+            }
+
+            var circle = document.createElement('div');
+            this.appendChild(circle);
+
+            var d = Math.max(this.clientWidth, this.clientHeight);
+            circle.style.width = circle.style.height = d + 'px';
+
+            circle.style.left = e.clientX - this.offsetLeft - d / 2 + 'px';
+            console.log(e.clientX, this.offsetLeft, d / 2, d);
+            circle.style.top = e.clientY - this.offsetTop - d / 2 + 'px';
+
+            circle.classList.add('ripple');
+        }
+    </script>
+</body>
+
+</html>
